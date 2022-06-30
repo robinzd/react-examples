@@ -1,8 +1,13 @@
-import { useState } from 'react';
+import React,{ useState,useEffect } from 'react';
 import ReactDOM from 'react-dom/client';
+import { BrowserRouter, Routes, Route } from "react-router-dom";
 import './index.css';
 // import App from './App';
 import reportWebVitals from './reportWebVitals';
+import Layout from "./pages/layout";
+import Home from './pages/home';
+import Blog from './pages/blog';
+
 
 
 
@@ -321,14 +326,163 @@ function Form2() {
 // forms in react //
 
 
-// redirecting to the another page //
 
 
 // redirecting to the another page //
+function Redirecting() {
+  return (
+    <>
+      <h1>My Links</h1>
+      <BrowserRouter>
+        <Routes>
+          <Route path="/" element={<Layout />}>
+            <Route index element={<Home />} />
+            <Route path="blog" element={<Blog />} />
+          </Route>
+        </Routes>
+      </BrowserRouter>
+    </>
+  );
+}
+
+// redirecting to the another page //
+
+//increment and decrement in react//
+const App1 = () => {
+  const [count, setCount] = useState(0);
+
+  const increment = () => {
+    setCount((c) => c + 1);
+  };
+
+  const decrement = () => {
+    setCount((c) =>c - 1);
+  };
+
+  return (
+    <>
+      <h1>Quantity</h1>
+      <div>
+        <button onClick={increment}>+</button>
+        Quantity:{count}
+        <button onClick={decrement}>-</button>
+      </div>
+    </>
+  );
+};
+//increment and decrement in react//
+
+// hooks in react//
+function Favorite(){
+  const [bike,setbike] = useState("R15");
+
+  return(
+    <>
+    <h1>My favorite Bike is {bike}!</h1>
+    <button
+      type="button"
+       onClick={() =>setbike("Royal Enfield")}
+    >Royal Enfield</button>
+    <button
+      type="button"
+       onClick={() => setbike("R15")}
+    >R15</button>
+    <button
+      type="button"
+       onClick={() => setbike("Pulsar 220")}
+    >Pulsar 220</button>
+    </>
+  );
+}
+
+
+// hooks in react//
+
+//usestate in react//
+function Favoritebike(){
+  const [brand,setbrand] =useState("Yamaha");
+  const [name,setname] =useState("RX100");
+  const [year,setyear] =useState("1983");
+  const [color,setcolor] =useState("Red");
+  return(
+<>
+<h1>My Bike is {name}</h1>
+<p>It is Launch In the year{year} it's color is {color} bike brand is {brand} </p>
+</>
+  );
+}
+
+function Cars() {
+  const [car, setCar] = useState({
+    brand: "Ford",
+    model: "Mustang",
+    year: "1964",
+    color: "red"
+  });
+
+  const updateColor = () => {
+    setCar(previousState => {
+      return { ...previousState, color: "blue"}
+    });
+  }
+
+  const updateColors = () => {
+    setCar(previousState => {
+      return { ...previousState, color: "voilet"}
+    });
+  }
+  const updatename = () => {
+    setCar(previousState => {
+      return { ...previousState, model: "Lambhorgini"}
+    });
+  }
+
+return (
+    <>
+      <h1>My {car.brand}</h1>
+      <p>
+        It is a {car.color} {car.model} from {car.year}.
+      </p>
+      <button
+        type="button"
+        onClick={updateColor}
+      >Blue</button>
+       <button
+        type="button"
+        onClick={updateColors}
+      >Voilet</button>
+      <button
+        type="button"
+        onClick={updatename}
+      >Lambhorgini</button>
+    </>
+  )
+}
+//usestate in react//
+
+
+// useeffect//
+function Timer() {
+  const [count, setCount] = useState(0);
+
+  useEffect(() => {
+    setTimeout(() => {
+      setCount((count) => count + 1);
+    },2000);
+  });
+
+
+
+  return <h1>I have rendered {count} times!</h1>;
+        
+}
+
+// useeffect//
 
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
+  <>
   <div>
     <Garage />
     <Cart />
@@ -337,8 +491,19 @@ root.render(
     <Form />
     <Form1 />
     <Form2 />
-  </div>
+    < Redirecting />
+    <App1 />
+    <Favorite />
+    <Favoritebike/>
+    <Cars />
+    <Timer />
+    </div>
+  </>
 );
+
+
+
+
 // list in react//
 
 
